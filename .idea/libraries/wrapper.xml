@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="wrapper">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/.mvn/wrapper" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/.mvn/wrapper" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/.mvn/wrapper" recursive="false" />
+  </library>
+</component>

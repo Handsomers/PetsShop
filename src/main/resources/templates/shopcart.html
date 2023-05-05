@@ -1,0 +1,175 @@
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>购物车</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../res/css/font.css" />
+  <link rel="stylesheet" href="../res/css/xadmin.css" />
+  <link rel="stylesheet" type="text/css" href="../res/static/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css" />
+  <script type="text/javascript" src="../res/layui/layui.js"></script>
+  <script type="text/javascript" src="../res/js/xadmin.js"></script>
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+</head>
+<body>
+
+  <div class="site-nav-bg">
+    <div class="site-nav w1200">
+      <p class="sn-back-home">
+        <i class="layui-icon layui-icon-home"></i>
+        <a href="/">首页</a>
+      </p>
+      <div class="sn-quick-menu">
+        <!--<div class="login"><a href="login.html">登录</a></div>-->
+        <!--<div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>-->
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="header">
+    <div class="headerLayout w1200">
+      <div class="headerCon">
+        <h1 class="mallLogo">
+          <a href="#" title="宠物商城">
+            <img src="../res/static/img/logo.png" />
+          </a>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="content content-nav-base shopcart-content">
+    <div class="cart w1200">
+      <div class="cart-table-th">
+        <div class="th th-chk">
+          <div class="select-all">
+            <div class="cart-checkbox">
+              <input class="check-all check" id="allCheckked" type="checkbox" value="true" />
+            </div>
+          <label>&nbsp;&nbsp;全选</label>
+          </div>
+        </div>
+        <div class="th th-item">
+          <div class="th-inner">
+            商品
+          </div>
+        </div>
+        <div class="th th-price">
+          <div class="th-inner">
+            单价
+          </div>
+        </div>
+        <div class="th th-amount">
+          <div class="th-inner">
+            数量
+          </div>
+        </div>
+        <div class="th th-sum">
+          <div class="th-inner">
+            小计
+          </div>
+        </div>
+        <div class="th th-op">
+          <div class="th-inner">
+            操作
+          </div>
+        </div>  
+      </div>
+      <div class="OrderList">
+        <div class="order-content" id="list-cont">
+          <ul class="item-content layui-clear" th:each="items:${Cart}">
+            <li class="th th-chk">
+              <div class="select-all">
+                <div class="cart-checkbox">
+                  <input class="CheckBoxShop check" id="" type="checkbox" num="all" name="select-all" value="true" />
+                </div>
+              </div>
+            </li>
+            <li class="th th-item">
+              <div class="item-cont">
+                <a href="javascript:;"><img th:src="@{'http://image.husky007.top/'+${items.image}}"/></a>
+                <div class="text">
+                  <div class="title" th:text="${items.name}">宝宝T恤棉质小衫</div>
+                  <!--<p><span>粉色</span>  <span>130</span>cm</p>-->
+                </div>
+              </div>
+            </li>
+            <li class="th th-price">
+              <span class="th-su" th:text="${items.price}">180.00</span>
+            </li>
+            <li class="th th-amount">
+              <!--<span th:text="${items.num}" th:value="${items.num}"></span>-->
+              <div class="box-btn layui-clear">
+                <!--<div class="less layui-btn">-</div>-->
+                <input class="Quantity-input" type="" name="" th:value="${items.num}" value="1" disabled="disabled" />
+                <!--<div class="add layui-btn">+</div>-->
+              </div>
+            </li>
+            <li class="th th-sum">
+              <span class="sum" th:text="${items.totalAmount}">180.00</span>
+            </li>
+            <li class="th th-op">
+              <a th:href="@{/deleteCartGood(id=${items.id})}"><span class="dele-btn">删除</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="FloatBarHolder layui-clear">
+        <div class="th th-chk">
+          <div class="select-all">
+            <div class="cart-checkbox">
+              <input class="check-all check" id="" name="select-all" type="checkbox"  value="true" />
+            </div>
+            <label>&nbsp;&nbsp;已选<span class="Selected-pieces">0</span>件</label>
+          </div>
+        </div>
+        <div class="th batch-deletion">
+          <!--<span class="batch-dele-btn">批量删除</span>-->
+        </div>
+        <div class="th Settlement">
+          <!--<button class="layui-btn" id="settle">结算</button>-->
+          <button class="layui-btn" onclick="x_admin_show('下单','/receipt',600,400)">下单</button>
+        </div>
+        <div class="th total">
+          <p>应付：<span class="pieces-total" id="totalPrice">0</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  layui.config({
+    base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+  }).use(['mm','jquery','element','car'],function(){
+    var mm = layui.mm,$ = layui.$,element = layui.element,car = layui.car;
+    car.init()
+});
+
+  $("#settle").click(function () {
+      alert("check")
+      $.ajax({
+          type:'post',
+          url:'/Cart/addIntoCart',
+          data:{gid:$("#gid").val(),num:$("#num").val()},
+          success:function(data){
+              if(data.toString() == "未登录"){
+                  window.location.href = "/login";
+              }else{
+                  window.location.href = "/Cart/queryCart"
+              }
+          },
+          error:function(){
+              layer.msg('添加购物车失败!',{icon:1,time:1000});
+          }
+      })
+  })
+</script>
+</body>
+</html>

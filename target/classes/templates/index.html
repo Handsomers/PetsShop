@@ -1,0 +1,312 @@
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>宠物商店</title>
+    <link rel="stylesheet" type="text/css" href="../res/static/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css" />
+    <script type="text/javascript" src="../res/layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+</head>
+<body id="list-cont">
+<div class="site-nav-bg">
+    <div class="site-nav w1200">
+        <p class="sn-back-home">
+            <i class="layui-icon layui-icon-home"></i>
+            <a href="/">首页</a>
+        </p>
+        <div class="sn-quick-menu">
+            <div class="login"><a href="/login">登录</a></div>
+            <div class="login"><a href="/goToRegister">注册</a></div>
+            <div class="login"><a href="/Cart/queryCart">购物车</a></div>
+            <div class="login"><a href="/queryCurrentAllOrders">我的订单</a></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="header">
+    <div class="headerLayout w1200">
+        <div class="headerCon">
+            <h1 class="mallLogo">
+                <a href="#" title="宠物商城">
+                    <img src="../res/static/img/logo.png" style="width: 600px"/>
+                </a>
+            </h1>
+            <div class="mallSearch">
+                <form action="/shop/queryGood" class="layui-form">
+                    <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" placeholder="请输入需要的商品" />
+                    <button class="layui-btn" lay-filter="formDemo">
+                        <i class="layui-icon layui-icon-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="main-nav">
+        <div class="inner-cont0">
+            <div class="inner-cont1 w1200">
+                <div class="inner-cont2">
+                    <a href="/shop/queryAllGoods">商城列表</a>
+                    <!--<a href="buytoday.html">今日团购</a>-->
+                    <a href="/inforMation">宠物资讯</a>
+                    <a href="/about">关于我们</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="category-con">
+        <div class="category-banner">
+        <div class="layui-carousel" id="test10" style="width: 100%">
+            <div carousel-item="">
+                <span th:each="items : ${Photo}">
+                     <div><img th:src="@{'http://rswjbmw0b.hb-bkt.clouddn.com/'+${items.image}}" width="100%"/></div>
+                </span>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!--<div class="floors">-->
+        <!--<div class="sk">-->
+            <!--<div class="sk_inner w1200">-->
+                <!--<div class="sk_hd">-->
+                    <!--<a href="javascript:;">-->
+                        <!--<img src="../res/static/img/s_img1.jpg" />-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<div class="sk_bd">-->
+                    <!--<div class="layui-carousel" id="test1">-->
+                        <!--<div class="carousel-item">-->
+                            <!--<div class="item-box">-->
+                                <!--<div class="item">-->
+                                    <!--<a href="javascript:;"><img src="../res/static/img/s_img2.jpg"  /></a>-->
+                                    <!--<div class="title">宝宝五彩袜棉质舒服</div>-->
+                                    <!--<div class="price">-->
+                                        <!--<span>￥49.00</span>-->
+                                        <!--<del>￥99.00</del>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="item">-->
+                                    <!--<a href="javascript:;"><img src="../res/static/img/s_img3.jpg"  /></a>-->
+                                    <!--<div class="title">宝宝五彩袜棉质舒服</div>-->
+                                    <!--<div class="price">-->
+                                        <!--<span>￥49.00</span>-->
+                                        <!--<del>￥99.00</del>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="item">-->
+                                    <!--<a href="javascript:;"><img src="../res/static/img/s_img4.jpg"  /></a>-->
+                                    <!--<div class="title">宝宝五彩袜棉质舒服</div>-->
+                                    <!--<div class="price">-->
+                                        <!--<span>￥49.00</span>-->
+                                        <!--<del>￥99.00</del>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="item">-->
+                                    <!--<a href="javascript:;"><img src="../res/static/img/s_img5.jpg"  /></a>-->
+                                    <!--<div class="title">宝宝五彩袜棉质舒服</div>-->
+                                    <!--<div class="price">-->
+                                        <!--<span>￥49.00</span>-->
+                                        <!--<del>￥99.00</del>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+
+    <div class="product-list-box" id="product-list-box1">
+        <div class="product-list-cont w1200">
+            <h4>热销排行榜前十名</h4>
+
+
+            <div class="product-item-box layui-clear">
+
+                <div th:each="items : ${Hot}">
+                    <div class="list-item">
+                        <a th:href="@{/goodsInfo(id=${items.gid})}"><img th:src="@{'http://rswjbmw0b.hb-bkt.clouddn.com/'+${items.image}}" width="200px" height="180px"/></a>
+                        <p th:text="${items.name}"></p>
+                        <span th:text="${'￥'+items.price}">￥</span>
+                        <span style="color:#999999;padding-left: 110px" th:text="${'已售'+items.total}">1277付款</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="product-cont w1200" id="product-cont">
+        <div class="product-item product-item1 layui-clear">
+            <div class="left-title">
+                <h4><i>1F</i></h4>
+                <img src="../res/static/img/icon_gou.png" />
+                <h5>推荐萌宠</h5>
+            </div>
+            <div class="right-cont">
+                <a href="javascript:;" class="top-img"><img src="../res/static/img/petBanner.jpeg" width="1000px"/></a>
+                <div class="img-box" th:each="items:${PetsRecommend}">
+                    <a th:href="@{/goodsInfo(id=${items.id})}"><img th:src="@{'http://rswjbmw0b.hb-bkt.clouddn.com/'+${items.image}}"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item product-item2 layui-clear">
+            <div class="left-title">
+                <h4><i>2F</i></h4>
+                <img src="../res/static/img/icon_gou.png" />
+                <h5>宠物口粮</h5>
+            </div>
+            <div class="right-cont">
+                <a href="javascript:;" class="top-img"><img src="../res/static/img/petFoods.jpg" width="1000px"  height="400px"/></a>
+                <div class="img-box" th:each="items:${PetsFood}">
+                    <a th:href="@{/goodsInfo(id=${items.id})}"><img th:src="@{'http://rswjbmw0b.hb-bkt.clouddn.com/'+${items.image}}"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="product-item product-item3 layui-clear">
+            <div class="left-title">
+                <h4><i>3F</i></h4>
+                <img src="../res/static/img/icon_gou.png" />
+                <h5>宠物玩具</h5>
+            </div>
+            <div class="right-cont">
+                <a href="javascript:;" class="top-img"><img src="../res/static/img/petGoods.jpeg" width="1000px"  height="400px"/></a>
+                <div class="img-box" th:each="items:${PetsToys}">
+                    <a th:href="@{/goodsInfo(id=${items.id})}"><img th:src="@{'http://rswjbmw0b.hb-bkt.clouddn.com/'+${items.image}}"/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-list-box" id="product-list-box">
+        <div class="product-list-cont w1200">
+            <h4>推荐商品</h4>
+
+
+            <div class="product-item-box layui-clear">
+
+                <div th:each="items : ${Recommend}">
+                <div class="list-item">
+                    <a th:href="@{/goodsInfo(id=${items.id})}"><img th:src="@{'http://rswjbmw0b.hb-bkt.clouddn.com/'+${items.image}}" width="200px" height="180px"/></a>
+                    <p th:text="${items.name}"></p>
+                    <span th:text="${'￥'+items.price}">￥</span>
+                </div>
+
+                </div>
+                <!--<div class="list-item">-->
+                    <!--<a href="javascript:;"><img src="../res/static/img/more2.jpg"  /></a>-->
+                    <!--<p>时尚宝宝小黄鸭T恤纯棉耐脏多色可选0-2岁宝宝</p>-->
+                    <!--<span>￥100.00</span>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="ng-promise-box">
+        <div class="ng-promise w1200">
+            <p class="text">
+                <a class="icon1" href="javascript:;">7天无理由退换货</a>
+                <a class="icon2" href="javascript:;">满99元全场免邮</a>
+                <a class="icon3" style="margin-right: 0" href="javascript:;">100%品质保证</a>
+            </p>
+        </div>
+    </div>
+    <div class="mod_help w1200">
+        <p>
+            <a href="javascript:;">关于我们</a>
+            <span>|</span>
+            <a href="javascript:;">帮助中心</a>
+            <span>|</span>
+            <a href="javascript:;">售后服务</a>
+            <span>|</span>
+            <a href="javascript:;">宠物讯</a>
+            <span>|</span>
+            <a href="javascript:;">关于货源</a>
+            <span>|</span>
+            <a href="/adminLogin">管理员后台</a>
+        </p>
+        <p class="coty">宠物商城版权所有 &copy;</p>
+    </div>
+</div>
+<script type="text/javascript">
+
+    layui.config({
+        base: '../res/static/js/util/' //你存放新模块的目录，注意，不是layui的模块目录
+    }).use(['mm','carousel'],function(){
+        var carousel = layui.carousel,
+            mm = layui.mm;
+        var option = {
+            elem: '#test1'
+            ,width: '100%' //设置容器宽度
+            ,arrow: 'always'
+            ,height:'298'
+            ,indicator:'none'
+        }
+        carousel.render(option);
+
+
+    });
+</script>
+
+<script>
+    layui.use(['carousel', 'form'], function(){
+        var carousel = layui.carousel
+            ,form = layui.form;
+
+        //图片轮播
+        carousel.render({
+            elem: '#test10'
+            ,width: '100%'
+            ,height: '440px'
+            ,interval: 3000
+        });
+
+        //事件
+        carousel.on('change(test4)', function(res){
+            console.log(res)
+        });
+
+        var $ = layui.$, active = {
+            set: function(othis){
+                var THIS = 'layui-bg-normal'
+                    ,key = othis.data('key')
+                    ,options = {};
+
+                othis.css('background-color', '#5FB878').siblings().removeAttr('style');
+                options[key] = othis.data('value');
+                ins3.reload(options);
+            }
+        };
+
+        //监听开关
+        form.on('switch(autoplay)', function(){
+            ins3.reload({
+                autoplay: this.checked
+            });
+        });
+
+        $('.demoSet').on('keyup', function(){
+            var value = this.value
+                ,options = {};
+            if(!/^\d+$/.test(value)) return;
+
+            options[this.name] = value;
+            ins3.reload(options);
+        });
+
+    });
+</script>
+</body>
+</html>

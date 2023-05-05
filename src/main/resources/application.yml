@@ -1,0 +1,11 @@
+#七牛配置
+qiniu:
+      AccessKey: ****
+      SecretKey: ****
+      Bucket: images
+
+#mybatis驼峰注解开启
+mybatis:
+      configuration:
+            map-underscore-to-camel-case: true
+

@@ -1,0 +1,121 @@
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>商品编辑</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../res/css/font.css" />
+    <link rel="stylesheet" href="../res/css/xadmin.css" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../res/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../res/js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-body layui-anim layui-anim-up">
+    <form class="layui-form" action="/Goods/update" method="put">
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">*</span>名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="hidden" name="id" th:value="${good.id}" />
+                <input type="text" id="name" name="name" required=""
+                       autocomplete="off" th:value="${good.name}" class="layui-input" />
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">*</span>价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="price" name="price" required=""
+                       autocomplete="off"  th:value="${good.price}" class="layui-input" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>一级分类
+            </label>
+            <div class="layui-input-inline">
+                <select id="supType" name="supType" lay-filter="sup">
+                    <option value="请选择" selected="selected">请选择</option>
+                    <span th:each="items : ${FirstTitle}">
+                        <option th:value="${items.id}" th:text="${items.name}"></option>
+                    </span>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="subType" class="layui-form-label">
+                <span class="x-red">*</span>二级分类
+            </label>
+            <div class="layui-input-inline">
+                <select id="subType" name="subType" lay-filter="sub">
+                    <option value="">请先选择一级分类</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="isRecommend" class="layui-form-label">
+                <span class="x-red">*</span>是否推荐
+            </label>
+            <div class="layui-input-inline">
+                <select id="isRecommend" name="isRecommend">
+                    <option value="1">推荐</option>
+                    <option value="0">普通</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+
+            <button  class="layui-btn">
+                编辑
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    layui.use(['form'],function(){
+        var form=layui.form;
+
+        form.render();
+        form.on('select(sup)',function (data) {
+            $.ajax({
+                type:'get',
+                url:'/Title/queryAllSecondByTitleId',
+                data:{id:$('#supType').val()},
+                success:function(result){
+                    $("#subType").find("option").remove();
+                    $("#subType").html("");
+                    $('#subType').empty();
+                    $.each(result,function (index,items) {
+                        secondName =items.name;
+                        secondId = items.id;
+                        $("#subType").append("<option value="+secondId+">"+secondName+"</option>");
+                    });
+                    $("#subType").show();
+
+                },
+                error:function(){
+                    layer.msg('请求失败!',{icon:1,time:1000});
+                }
+            })
+        })
+    })
+</script>
+</body>
+
+</html>
