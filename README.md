@@ -78,11 +78,7 @@
 
 ![image-20230425095243674.png](https://github.com/Handsomers/PetsShop/blob/main/img/image-20230425095243674.png?raw=true)
 
-![image-20230425095413470](C:\Users\59731\AppData\Roaming\Typora\typora-user-images\image-20230425095413470.png)
-
 ![image-20230425095353741.png](https://github.com/Handsomers/PetsShop/blob/main/img/image-20230425095353741.png?raw=true)
-
-![image-20230425095428598](C:\Users\59731\AppData\Roaming\Typora\typora-user-images\image-20230425095428598.png)
 
 ![image-20230425095439832.png](https://github.com/Handsomers/PetsShop/blob/main/img/image-20230425095439832.png?raw=true)
 
